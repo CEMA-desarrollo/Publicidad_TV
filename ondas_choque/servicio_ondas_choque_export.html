@@ -177,47 +177,42 @@
         }
 
         /* 
-           Maximizing Space:
-           - Tighter columns (Left and Right closer to center)
-           - Uniform slight rotation for style but cleaner alignment
+           Maximizing Space & Uniform Orientation:
+           - Tighter columns 
+           - No rotation (0deg) for clean alignment vertically and horizontally
         */
 
-        /* Row 1 */
+        /* Row 1 (Top) */
         .c1 {
             top: 2%;
-            left: 5%;
-            /* Closer to edge */
+            left: 2%;
             z-index: 1;
-            transform: rotate(-1deg);
+            transform: none;
             animation-delay: 1.0s;
         }
 
         .c2 {
             top: 2%;
-            right: 5%;
-            /* Closer to edge */
+            right: 2%;
             z-index: 1;
-            transform: rotate(1deg);
-            /* Symmetrical rotation */
+            transform: none;
             animation-delay: 1.1s;
         }
 
-        /* Row 2 (Overlapping Row 1 vertically) */
+        /* Row 2 (Bottom - Overlapping) */
         .c3 {
             bottom: 2%;
-            left: 10%;
-            /* Shifted slightly right for overlap effect */
+            left: 2%;
             z-index: 2;
-            transform: rotate(-2deg);
+            transform: none;
             animation-delay: 1.2s;
         }
 
         .c4 {
             bottom: 2%;
-            right: 10%;
-            /* Shifted slightly left for overlap effect */
+            right: 2%;
             z-index: 2;
-            transform: rotate(2deg);
+            transform: none;
             animation-delay: 1.3s;
         }
 
