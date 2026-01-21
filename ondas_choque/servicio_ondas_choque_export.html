@@ -177,17 +177,18 @@
         }
 
         /* 
-           Maximizing Space & Uniform Orientation:
-           - Tighter columns 
-           - No rotation (0deg) for clean alignment vertically and horizontally
+           Card Stack Effect:
+           - Overlapping Vertical Stacks
+           - "Same Orientation" (Parallel rotation, not mirrored)
         */
 
-        /* Row 1 (Top) */
+        /* Row 1 (Back Layer) */
         .c1 {
             top: 2%;
             left: 2%;
             z-index: 1;
-            transform: none;
+            transform: rotate(-2deg);
+            /* Uniform rotation */
             animation-delay: 1.0s;
         }
 
@@ -195,24 +196,31 @@
             top: 2%;
             right: 2%;
             z-index: 1;
-            transform: none;
+            transform: rotate(-2deg);
+            /* Same orientation as c1 */
             animation-delay: 1.1s;
         }
 
-        /* Row 2 (Bottom - Overlapping) */
+        /* Row 2 (Front Layer - Overlapping) */
         .c3 {
-            bottom: 2%;
-            left: 2%;
+            top: 35%;
+            /* Moves up to overlap the top row */
+            left: 5%;
+            /* Slight offset for "stack" feel */
             z-index: 2;
-            transform: none;
+            transform: rotate(-2deg);
+            /* Same orientation */
             animation-delay: 1.2s;
         }
 
         .c4 {
-            bottom: 2%;
-            right: 2%;
+            top: 35%;
+            /* Moves up to overlap the top row */
+            right: 1%;
+            /* Adjusted to match parallel look */
             z-index: 2;
-            transform: none;
+            transform: rotate(-2deg);
+            /* Same orientation */
             animation-delay: 1.3s;
         }
 
