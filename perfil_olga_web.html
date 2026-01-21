@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil Dra. Olga Forero - CEMA</title>
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-teal: #009CA6;
+            --secondary-slate: #1E293B;
+            --accent-gold: #C5A065;
+            --bg-white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-white);
+            background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+            background-size: 3vmin 3vmin;
+            color: var(--secondary-slate);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Layout Container - USING VMIN sizes to force fit */
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            /* Equal split to allow photo to grow */
+            width: 90vw;
+            height: 90vh;
+            /* Use more vertical space */
+            gap: 4vmin;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Left Side: Photo */
+        .photo-section {
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Center photo in its column */
+            opacity: 0;
+            animation: slideUpFade 1.2s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+
+        .photo-frame {
+            position: relative;
+            width: 48vmin;
+            /* Increased from 35vmin to 48vmin (much larger) */
+            height: auto;
+            aspect-ratio: 3/4;
+            border-radius: 2vmin;
+            overflow: hidden;
+            box-shadow: 2vmin 2vmin 6vmin rgba(0, 0, 0, 0.1),
+                -2vmin -2vmin 6vmin rgba(255, 255, 255, 0.8);
+            border: 0.8vmin solid white;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.1);
+            transition: transform 10s ease;
+        }
+
+        .photo-frame:hover img {
+            transform: scale(1.0);
+        }
+
+        .blob {
+            position: absolute;
+            width: 65vmin;
+            height: 65vmin;
+            background: var(--primary-teal);
+            opacity: 0.1;
+            border-radius: 50%;
+            filter: blur(8vmin);
+            z-index: -1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Right Side: Content */
+        .info-section {
+            padding: 2vmin;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* Ensure vertical centering */
+        }
+
+        .header-logo {
+            width: 22vmin;
+            /* Increased from 18vmin */
+            margin-bottom: 2vmin;
+            opacity: 0;
+            animation: fadeInDown 1s ease-out forwards;
+            animation-delay: 0.2s;
+        }
+
+        h2 {
+            font-size: 3vmin;
+            /* Increased */
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.2vmin;
+            font-weight: 600;
+            margin-bottom: 1vmin;
+            opacity: 0;
+            animation: slideRight 1s ease-out forwards;
+            animation-delay: 0.8s;
+        }
+
+        h1 {
+            font-size: 9vmin;
+            /* Increased to fill more space */
+            font-weight: 700;
+            line-height: 1.05;
+            margin-bottom: 2.5vmin;
+            color: var(--secondary-slate);
+            opacity: 0;
+            animation: slideRight 1s ease-out forwards;
+            animation-delay: 1.0s;
+        }
+
+        .description {
+            font-size: 2.5vmin;
+            /* Increased from 2.2 */
+            line-height: 1.4;
+            color: #475569;
+            max-width: 100%;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-out forwards;
+            animation-delay: 1.4s;
+            border-left: 0.8vmin solid var(--primary-teal);
+            padding-left: 2.5vmin;
+        }
+
+        .specialties {
+            margin-top: 4vmin;
+            display: flex;
+            gap: 1.5vmin;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background-color: rgba(0, 156, 166, 0.1);
+            color: var(--primary-teal);
+            padding: 1vmin 2.5vmin;
+            border-radius: 5vmin;
+            font-weight: 600;
+            font-size: 2vmin;
+            opacity: 0;
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .tag:nth-child(1) {
+            animation-delay: 1.8s;
+        }
+
+        .tag:nth-child(2) {
+            animation-delay: 2.0s;
+        }
+
+        .tag:nth-child(3) {
+            animation-delay: 2.2s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-3vmin);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUpFade {
+            from {
+                opacity: 0;
+                transform: translateY(5vmin);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideRight {
+            from {
+                opacity: 0;
+                transform: translateX(-5vmin);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Left Side -->
+        <div class="photo-section">
+            <div class="blob"></div>
+            <div class="photo-frame">
+                <img src="olga_forero.jpg" alt="Dra. Olga Forero">
+            </div>
+        </div>
+
+        <!-- Right Side -->
+        <div class="info-section">
+            <img src="logo_cema.png" alt="CEMA Logo" class="header-logo">
+
+            <h2>Especialista CEMA</h2>
+            <h1>Dra. Olga Forero</h1>
+
+            <div class="description">
+                <p>M&eacute;dico egresado de la UCLA.</p>
+                <p style="margin-top: 1rem;">PostGrado en <strong>Medicina F&iacute;sica y
+                        Rehabilitaci&oacute;n</strong> (UCLA).</p>
+                <p style="margin-top: 1rem;">Curso de electromiograf&iacute;a y Conducciones nerviosas (UCLA).</p>
+                <p style="margin-top: 1rem;">Acupuntura para m&eacute;dicos (UCLA).</p>
+            </div>
+
+            <div class="specialties">
+                <span class="tag">Medicina F&iacute;sica</span>
+                <span class="tag">Rehabilitaci&oacute;n</span>
+                <span class="tag">Electromiograf&iacute;a</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
