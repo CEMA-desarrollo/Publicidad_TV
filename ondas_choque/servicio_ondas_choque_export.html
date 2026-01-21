@@ -48,14 +48,14 @@
             gap: 4vmin;
         }
 
-        /* --- Visual Section (Left) --- */
+        /* --- Visual Section (Left - Collage Layout) --- */
         .visual-section {
-            display: flex;
-            flex-direction: column;
-            gap: 2vmin;
             position: relative;
             height: 100%;
-            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 1vmin 0;
         }
 
         .blob {
@@ -72,71 +72,172 @@
             transform: translate(-50%, -50%);
         }
 
-        /* Main Equipment Photo */
-        .main-photo {
-            flex: 2;
-            /* Takes up 2/3 of available height */
+        /* Hero Composition */
+        .hero-composition {
+            position: relative;
+            height: 62%;
+            /* Increased height */
             width: 100%;
-            border-radius: 2vmin;
-            overflow: hidden;
-            background: white;
-            box-shadow: 1vmin 1vmin 4vmin rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            animation: slideUpFade 1s ease-out forwards;
         }
 
-        .main-photo img {
+        .hero-card {
+            position: absolute;
+            border-radius: 2vmin;
+            overflow: hidden;
+            box-shadow: 1vmin 1vmin 3vmin rgba(0, 0, 0, 0.15);
+            background: white;
+            transition: all 0.5s ease;
+        }
+
+        .hero-card img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            padding: 2vmin;
+            /* Ensure full product is visible */
         }
 
-        /* Gallery Grid */
-        .gallery-grid {
-            flex: 1;
-            /* Takes up 1/3 height */
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5vmin;
+        /* Back Card (The Machine Body) - Now centered and larger */
+        .back-card {
+            top: 0;
+            left: 2%;
+            width: 75%;
+            height: 90%;
+            z-index: 1;
+            opacity: 0;
+            animation: slideDownFade 1s ease-out forwards 0.3s;
         }
 
-        .gallery-item {
+        /* Front Card (The Handpiece/Detail) - Floating in corner, larger */
+        .front-card {
+            bottom: 2%;
+            right: 2%;
+            width: 45%;
+            height: 55%;
+            z-index: 2;
+            border: 0.4vmin solid white;
+            box-shadow: 2vmin 2vmin 5vmin rgba(0, 0, 0, 0.25);
+            opacity: 0;
+            animation: slideUpFade 1s ease-out forwards 0.5s;
+        }
+
+        /* Interactive Hero Hover */
+        .hero-card:hover {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        /* Therapy Stack (Fanned Cards - Bigger & clearer) */
+        .therapy-stack-container {
+            height: 35%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding-left: 2%;
+        }
+
+        .stack-label {
+            position: absolute;
+            top: -2.5vmin;
+            left: 5%;
+            font-size: 1.6vmin;
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.1vmin;
+        }
+
+        .cards-fan {
+            position: relative;
+            width: 100%;
             height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .fan-card {
+            position: absolute;
+            width: 26vmin;
+            /* Much larger */
+            height: 18vmin;
             border-radius: 1.5vmin;
             overflow: hidden;
-            box-shadow: 0.5vmin 0.5vmin 2vmin rgba(0, 0, 0, 0.1);
-            border: 2px solid white;
+            border: 0.6vmin solid white;
+            box-shadow: 0.5vmin 0.5vmin 2vmin rgba(0, 0, 0, 0.15);
+            background: #fff;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-origin: bottom center;
             opacity: 0;
-            animation: popIn 0.8s ease-out forwards;
+            cursor: pointer;
+            /* Indicative */
+            animation: dealCard 0.6s ease-out forwards;
         }
 
-        .gallery-item img {
+        .fan-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
         }
 
-        .gallery-item:hover img {
-            transform: scale(1.1);
+        /* Spread them out more */
+        .c1 {
+            left: 0%;
+            z-index: 1;
+            transform: rotate(-5deg);
+            animation-delay: 1.0s;
         }
 
-        /* Staggered animation for gallery */
-        .gallery-item:nth-child(1) {
-            animation-delay: 0.5s;
+        .c2 {
+            left: 20%;
+            z-index: 2;
+            transform: rotate(-2deg);
+            animation-delay: 1.1s;
         }
 
-        .gallery-item:nth-child(2) {
-            animation-delay: 0.6s;
+        .c3 {
+            left: 40%;
+            z-index: 3;
+            transform: rotate(2deg);
+            animation-delay: 1.2s;
         }
 
-        .gallery-item:nth-child(3) {
-            animation-delay: 0.7s;
+        .c4 {
+            left: 60%;
+            z-index: 4;
+            transform: rotate(5deg);
+            animation-delay: 1.3s;
         }
 
-        .gallery-item:nth-child(4) {
-            animation-delay: 0.8s;
+        /* Hover Effect: Bring to front and scale up significantly */
+        .fan-card:hover {
+            z-index: 100;
+            /* Force on top */
+            transform: scale(1.25) translateY(-2vmin) rotate(0deg) !important;
+            box-shadow: 2vmin 2vmin 4vmin rgba(0, 0, 0, 0.3);
+            border-color: var(--primary-teal);
+        }
+
+        @keyframes slideDownFade {
+            from {
+                opacity: 0;
+                transform: translateY(-3vmin);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes dealCard {
+            from {
+                opacity: 0;
+                transform: translateY(5vmin) scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
         /* --- Info Section (Right) --- */
@@ -341,21 +442,31 @@
 <body>
 
     <div class="container">
-        <!-- Left Side: Visuals (Main Image + Gallery) -->
+        <!-- Left Side: Visuals (Collage Composition) -->
         <div class="visual-section">
             <div class="blob"></div>
 
-            <!-- Main Equipment Photo -->
-            <div class="main-photo">
-                <img src="../assets/equipo_ondas_choque.jpg" alt="Equipo BTL Ondas de Choque">
+            <!-- Hero Composition (The 2 Main Images) -->
+            <div class="hero-composition">
+                <!-- Image 1: The Equipment Body (Background) -->
+                <div class="hero-card back-card">
+                    <img src="../assets/equipo.jpg" alt="Equipo en Consultorio">
+                </div>
+                <!-- Image 2: The Handpiece/Detail (Foreground) -->
+                <div class="hero-card front-card">
+                    <img src="../assets/onda de choque.webp" alt="Tecnología BTL">
+                </div>
             </div>
 
-            <!-- Action Gallery -->
-            <div class="gallery-grid">
-                <div class="gallery-item"><img src="../assets/ondas1.jpg" alt="Tratamiento Hombro"></div>
-                <div class="gallery-item"><img src="../assets/ondas 2.jpg" alt="Tratamiento Codo"></div>
-                <div class="gallery-item"><img src="../assets/ondas 3.jpg" alt="Tratamiento Espalda"></div>
-                <div class="gallery-item"><img src="../assets/ondas 4.jpg" alt="Tratamiento Pierna"></div>
+            <!-- Therapy Cards Stack (Polaroid Style Fan) -->
+            <div class="therapy-stack-container">
+                <p class="stack-label">Aplicación Terapéutica</p>
+                <div class="cards-fan">
+                    <div class="fan-card c1"><img src="../assets/ondas1.jpg" alt="Terapia 1"></div>
+                    <div class="fan-card c2"><img src="../assets/ondas 2.jpg" alt="Terapia 2"></div>
+                    <div class="fan-card c3"><img src="../assets/ondas 3.jpg" alt="Terapia 3"></div>
+                    <div class="fan-card c4"><img src="../assets/ondas 4.jpg" alt="Terapia 4"></div>
+                </div>
             </div>
         </div>
 
