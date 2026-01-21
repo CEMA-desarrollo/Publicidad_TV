@@ -126,14 +126,14 @@
             z-index: 10;
         }
 
-        /* Therapy Stack (2-Column Collage) */
+        /* Therapy Stack (Tight 2-Column Grid) */
         .therapy-stack-container {
             height: 45%;
-            /* Increased height significantly */
             position: relative;
             display: flex;
             align-items: center;
             padding-left: 0;
+            margin-top: 1vmin;
         }
 
         .stack-label {
@@ -155,9 +155,10 @@
 
         .fan-card {
             position: absolute;
-            width: 24vmin;
-            /* Optimal size for 2 columns */
-            height: 16vmin;
+            width: 32vmin;
+            /* Significantly larger width */
+            height: 19vmin;
+            /* Slightly taller */
             border-radius: 1.5vmin;
             overflow: hidden;
             border: 0.4vmin solid white;
@@ -175,40 +176,48 @@
             object-fit: cover;
         }
 
-        /* 2x2 Overlapping Formation */
-        /* Column 1 (Left) */
+        /* 
+           Maximizing Space:
+           - Tighter columns (Left and Right closer to center)
+           - Uniform slight rotation for style but cleaner alignment
+        */
+
+        /* Row 1 */
         .c1 {
-            top: 5%;
-            left: 2%;
+            top: 2%;
+            left: 5%;
+            /* Closer to edge */
             z-index: 1;
-            transform: rotate(-2deg);
+            transform: rotate(-1deg);
             animation-delay: 1.0s;
         }
 
-        .c3 {
-            top: 45%;
-            /* Overlaps c1 vertically */
-            left: 8%;
-            z-index: 2;
-            transform: rotate(1deg);
-            animation-delay: 1.2s;
-        }
-
-        /* Column 2 (Right) */
         .c2 {
-            top: 5%;
+            top: 2%;
             right: 5%;
+            /* Closer to edge */
             z-index: 1;
-            transform: rotate(2deg);
+            transform: rotate(1deg);
+            /* Symmetrical rotation */
             animation-delay: 1.1s;
         }
 
-        .c4 {
-            top: 45%;
-            /* Overlaps c2 vertically */
-            right: 11%;
+        /* Row 2 (Overlapping Row 1 vertically) */
+        .c3 {
+            bottom: 2%;
+            left: 10%;
+            /* Shifted slightly right for overlap effect */
             z-index: 2;
-            transform: rotate(-1deg);
+            transform: rotate(-2deg);
+            animation-delay: 1.2s;
+        }
+
+        .c4 {
+            bottom: 2%;
+            right: 10%;
+            /* Shifted slightly left for overlap effect */
+            z-index: 2;
+            transform: rotate(2deg);
             animation-delay: 1.3s;
         }
 
