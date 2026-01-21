@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
+        /* Updated CSS for Redesign */
         :root {
             --primary-teal: #009CA6;
             --secondary-slate: #1E293B;
@@ -38,172 +39,250 @@
             justify-content: center;
         }
 
-        /* Layout Container - USING VMIN sizes to force fit */
         .container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            /* Equal split to allow photo to grow */
-            width: 90vw;
-            height: 90vh;
-            /* Use more vertical space */
+            grid-template-columns: 0.9fr 1.1fr;
+            /* Give more space to text */
+            width: 92vw;
+            height: 92vh;
             gap: 4vmin;
-            align-items: center;
-            justify-content: center;
         }
 
-        /* Left Side: Photo */
-        .photo-section {
-            position: relative;
-            height: 100%;
+        /* --- Visual Section (Left) --- */
+        .visual-section {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            /* Center photo in its column */
-            opacity: 0;
-            animation: slideUpFade 1.2s ease-out forwards;
-            animation-delay: 0.5s;
-        }
-
-        .photo-frame {
+            flex-direction: column;
+            gap: 2vmin;
             position: relative;
-            width: 48vmin;
-            /* Increased from 35vmin to 48vmin (much larger) */
-            height: auto;
-            aspect-ratio: 3/4;
-            border-radius: 2vmin;
-            overflow: hidden;
-            box-shadow: 2vmin 2vmin 6vmin rgba(0, 0, 0, 0.1),
-                -2vmin -2vmin 6vmin rgba(255, 255, 255, 0.8);
-            border: 0.8vmin solid white;
-            background-color: white;
-            /* Ensure white background for product photos */
-        }
-
-        .photo-frame img {
-            width: 100%;
             height: 100%;
-            object-fit: contain;
-            /* Changed to contain for product image */
-            padding: 2vmin;
-            /* Add padding so product isn't edge-to-edge */
-            transform: scale(1.0);
-            transition: transform 10s ease;
-        }
-
-        .photo-frame:hover img {
-            transform: scale(1.05);
+            justify-content: center;
         }
 
         .blob {
             position: absolute;
-            width: 65vmin;
-            height: 65vmin;
+            width: 70vmin;
+            height: 70vmin;
             background: var(--primary-teal);
-            opacity: 0.1;
+            opacity: 0.08;
             border-radius: 50%;
-            filter: blur(8vmin);
+            filter: blur(10vmin);
             z-index: -1;
-            top: 50%;
-            left: 50%;
+            top: 40%;
+            left: 40%;
             transform: translate(-50%, -50%);
         }
 
-        /* Right Side: Content */
-        .info-section {
+        /* Main Equipment Photo */
+        .main-photo {
+            flex: 2;
+            /* Takes up 2/3 of available height */
+            width: 100%;
+            border-radius: 2vmin;
+            overflow: hidden;
+            background: white;
+            box-shadow: 1vmin 1vmin 4vmin rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            animation: slideUpFade 1s ease-out forwards;
+        }
+
+        .main-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
             padding: 2vmin;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            /* Ensure vertical centering */
         }
 
-        .header-logo {
-            width: 22vmin;
-            /* Increased from 18vmin */
-            margin-bottom: 2vmin;
-            opacity: 0;
-            animation: fadeInDown 1s ease-out forwards;
-            animation-delay: 0.2s;
+        /* Gallery Grid */
+        .gallery-grid {
+            flex: 1;
+            /* Takes up 1/3 height */
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5vmin;
         }
 
-        h2 {
-            font-size: 3vmin;
-            /* Increased */
-            color: var(--accent-gold);
-            text-transform: uppercase;
-            letter-spacing: 0.2vmin;
-            font-weight: 600;
-            margin-bottom: 1vmin;
+        .gallery-item {
+            height: 100%;
+            border-radius: 1.5vmin;
+            overflow: hidden;
+            box-shadow: 0.5vmin 0.5vmin 2vmin rgba(0, 0, 0, 0.1);
+            border: 2px solid white;
             opacity: 0;
-            animation: slideRight 1s ease-out forwards;
+            animation: popIn 0.8s ease-out forwards;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Staggered animation for gallery */
+        .gallery-item:nth-child(1) {
+            animation-delay: 0.5s;
+        }
+
+        .gallery-item:nth-child(2) {
+            animation-delay: 0.6s;
+        }
+
+        .gallery-item:nth-child(3) {
+            animation-delay: 0.7s;
+        }
+
+        .gallery-item:nth-child(4) {
             animation-delay: 0.8s;
         }
 
-        h1 {
-            font-size: 7vmin;
-            /* Slightly smaller for long product titles */
-            /* Increased to fill more space */
+        /* --- Info Section (Right) --- */
+        .info-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2vmin;
+        }
+
+        .header-group {
+            display: flex;
+            align-items: center;
+            gap: 2vmin;
+            margin-bottom: 2vmin;
+        }
+
+        .header-logo {
+            width: 12vmin;
+            opacity: 0;
+            animation: fadeInDown 0.8s ease-out forwards;
+        }
+
+        h2 {
+            font-size: 2.5vmin;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.2vmin;
             font-weight: 700;
-            line-height: 1.05;
-            margin-bottom: 2.5vmin;
+            opacity: 0;
+            animation: slideRight 0.8s ease-out forwards 0.2s;
+        }
+
+        h1 {
+            font-size: 6vmin;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 2vmin;
             color: var(--secondary-slate);
             opacity: 0;
-            animation: slideRight 1s ease-out forwards;
-            animation-delay: 1.0s;
+            animation: slideRight 0.8s ease-out forwards 0.4s;
         }
 
-        .description {
-            font-size: 2.5vmin;
-            /* Increased from 2.2 */
-            line-height: 1.4;
+        .intro-text p {
+            font-size: 2.2vmin;
             color: #475569;
-            max-width: 100%;
+            margin-bottom: 3vmin;
+            max-width: 90%;
+            line-height: 1.4;
             opacity: 0;
-            animation: fadeIn 1.5s ease-out forwards;
-            animation-delay: 1.4s;
-            border-left: 0.8vmin solid var(--primary-teal);
-            padding-left: 2.5vmin;
+            animation: fadeIn 1s ease-out forwards 0.6s;
         }
 
-        .specialties {
-            margin-top: 4vmin;
+        /* Benefits List Styling */
+        .benefits-container {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(5px);
+            padding: 3vmin;
+            border-radius: 2vmin;
+            border-left: 0.8vmin solid var(--primary-teal);
+            margin-bottom: 3vmin;
+            opacity: 0;
+            animation: slideUpFade 1s ease-out forwards 0.8s;
+        }
+
+        .benefits-title {
+            font-size: 2.2vmin;
+            color: var(--primary-teal);
+            margin-bottom: 2vmin;
+            font-weight: 700;
+        }
+
+        .benefits-list {
+            list-style: none;
             display: flex;
+            flex-direction: column;
+            gap: 1.8vmin;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
             gap: 1.5vmin;
+        }
+
+        .check-icon {
+            background: var(--primary-teal);
+            color: white;
+            width: 2.5vmin;
+            height: 2.5vmin;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5vmin;
+            flex-shrink: 0;
+            margin-top: 0.3vmin;
+        }
+
+        .benefit-text strong {
+            display: block;
+            font-size: 2vmin;
+            color: var(--secondary-slate);
+        }
+
+        .benefit-text span {
+            font-size: 1.8vmin;
+            color: #64748b;
+        }
+
+        /* Specialties Tags */
+        .specialties {
+            display: flex;
+            gap: 1.2vmin;
             flex-wrap: wrap;
         }
 
         .tag {
-            background-color: rgba(0, 156, 166, 0.1);
-            color: var(--primary-teal);
-            padding: 1vmin 2.5vmin;
+            background-color: var(--secondary-slate);
+            color: white;
+            padding: 0.8vmin 2.2vmin;
             border-radius: 5vmin;
             font-weight: 600;
-            font-size: 2vmin;
+            font-size: 1.8vmin;
             opacity: 0;
-            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
         .tag:nth-child(1) {
-            animation-delay: 1.8s;
+            animation-delay: 1.2s;
         }
 
         .tag:nth-child(2) {
-            animation-delay: 2.0s;
+            animation-delay: 1.3s;
         }
 
         .tag:nth-child(3) {
-            animation-delay: 2.2s;
+            animation-delay: 1.4s;
         }
 
         .tag:nth-child(4) {
-            animation-delay: 2.4s;
+            animation-delay: 1.5s;
         }
 
+        /* Animations */
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
             to {
                 opacity: 1;
             }
@@ -212,19 +291,7 @@
         @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateY(-3vmin);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideUpFade {
-            from {
-                opacity: 0;
-                transform: translateY(5vmin);
+                transform: translateY(-2vmin);
             }
 
             to {
@@ -236,12 +303,24 @@
         @keyframes slideRight {
             from {
                 opacity: 0;
-                transform: translateX(-5vmin);
+                transform: translateX(-3vmin);
             }
 
             to {
                 opacity: 1;
                 transform: translateX(0);
+            }
+        }
+
+        @keyframes slideUpFade {
+            from {
+                opacity: 0;
+                transform: translateY(3vmin);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
@@ -262,31 +341,79 @@
 <body>
 
     <div class="container">
-        <!-- Left Side -->
-        <div class="photo-section">
+        <!-- Left Side: Visuals (Main Image + Gallery) -->
+        <div class="visual-section">
             <div class="blob"></div>
-            <div class="photo-frame">
-                <img src="../assets/equipo_ondas_choque.jpg" alt="BTL Radial Shockwave">
+
+            <!-- Main Equipment Photo -->
+            <div class="main-photo">
+                <img src="../assets/equipo_ondas_choque.jpg" alt="Equipo BTL Ondas de Choque">
+            </div>
+
+            <!-- Action Gallery -->
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="../assets/ondas1.jpg" alt="Tratamiento Hombro"></div>
+                <div class="gallery-item"><img src="../assets/ondas 2.jpg" alt="Tratamiento Codo"></div>
+                <div class="gallery-item"><img src="../assets/ondas 3.jpg" alt="Tratamiento Espalda"></div>
+                <div class="gallery-item"><img src="../assets/ondas 4.jpg" alt="Tratamiento Pierna"></div>
             </div>
         </div>
 
-        <!-- Right Side -->
+        <!-- Right Side: Content & Benefits -->
         <div class="info-section">
-            <img src="../assets/logo_cema.png" alt="CEMA Logo" class="header-logo">
-            <h2>Tecnología Avanzada</h2>
+            <div class="header-group">
+                <img src="../assets/logo_cema.png" alt="CEMA Logo" class="header-logo">
+                <h2>Tecnología Avanzada</h2>
+            </div>
+
             <h1>Ondas de Choque Radiales</h1>
-            <div class="description">
-                <p><strong>El estándar de oro para el tratamiento del dolor crónico.</strong></p>
-                <p style="margin-top: 1rem;">Nuestra tecnología de ondas de choque estimula la regeneración de tejidos,
-                    aumenta la circulación y rompe el ciclo del dolor de forma rápida y no invasiva.</p>
-                <p style="margin-top: 1rem;"><strong>Resultados efectivos sin cirugía ni medicamentos.</strong></p>
+
+            <div class="intro-text">
+                <p>La solución definitiva y <strong>no invasiva</strong> para recuperar tu movilidad y eliminar el dolor
+                    crónico sin cirugía.</p>
+            </div>
+
+            <!-- Benefits Wrapper -->
+            <div class="benefits-container">
+                <h3 class="benefits-title">¿Por qué elegir este tratamiento?</h3>
+
+                <ul class="benefits-list">
+                    <li class="benefit-item">
+                        <span class="check-icon">✓</span>
+                        <div class="benefit-text">
+                            <strong>Alivio Inmediato del Dolor</strong>
+                            <span>Disminuye la tensión muscular desde la primera sesión.</span>
+                        </div>
+                    </li>
+                    <li class="benefit-item">
+                        <span class="check-icon">✓</span>
+                        <div class="benefit-text">
+                            <strong>Acelera la Regeneración</strong>
+                            <span>Estimula la producción de colágeno y nuevos vasos sanguíneos.</span>
+                        </div>
+                    </li>
+                    <li class="benefit-item">
+                        <span class="check-icon">✓</span>
+                        <div class="benefit-text">
+                            <strong>Disuelve Calcificaciones</strong>
+                            <span>Rompe acumulaciones de calcio en tendones y articulaciones.</span>
+                        </div>
+                    </li>
+                    <li class="benefit-item">
+                        <span class="check-icon">✓</span>
+                        <div class="benefit-text">
+                            <strong>Sin Efectos Secundarios</strong>
+                            <span>Alternativa natural a las inyecciones de cortisona.</span>
+                        </div>
+                    </li>
+                </ul>
             </div>
 
             <div class="specialties">
-                <span class="tag">Dolor Crónico</span>
-                <span class="tag">Calcificaciones</span>
-                <span class="tag">Tendinopatías</span>
-                <span class="tag">Espasmos Musculares</span>
+                <span class="tag">Tendinitis</span>
+                <span class="tag">Espolón Calcáneo</span>
+                <span class="tag">Codo de Tenista</span>
+                <span class="tag">Dolor de Espalda</span>
             </div>
         </div>
     </div>
@@ -294,4 +421,3 @@
 </body>
 
 </html>
-
