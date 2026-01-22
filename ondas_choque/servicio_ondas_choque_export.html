@@ -153,12 +153,17 @@
             height: 100%;
         }
 
+        /* 
+           Card Stack Effect:
+           - Tweaked for Maximum Visibility (Less overlap)
+           - Right column fixed to prevent clipping
+        */
+
         .fan-card {
             position: absolute;
-            width: 32vmin;
-            /* Significantly larger width */
+            width: 30vmin;
+            /* Slightly adjusted to fit better */
             height: 19vmin;
-            /* Slightly taller */
             border-radius: 1.5vmin;
             overflow: hidden;
             border: 0.4vmin solid white;
@@ -167,61 +172,48 @@
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             opacity: 0;
             cursor: pointer;
+            object-fit: cover;
             animation: dealCard 0.6s ease-out forwards;
         }
 
-        .fan-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* 
-           Card Stack Effect:
-           - Overlapping Vertical Stacks
-           - "Same Orientation" (Parallel rotation, not mirrored)
-        */
-
         /* Row 1 (Back Layer) */
         .c1 {
-            top: 2%;
+            top: 0%;
             left: 2%;
             z-index: 1;
             transform: rotate(-2deg);
-            /* Uniform rotation */
             animation-delay: 1.0s;
         }
 
         .c2 {
-            top: 2%;
-            right: 2%;
+            top: 0%;
+            right: 4%;
+            /* More margin from right edge */
             z-index: 1;
             transform: rotate(-2deg);
-            /* Same orientation as c1 */
             animation-delay: 1.1s;
         }
 
-        /* Row 2 (Front Layer - Overlapping) */
+        /* Row 2 (Front Layer - Reduced Overlap) */
         .c3 {
-            top: 35%;
-            /* Moves up to overlap the top row */
+            top: 40%;
+            /* Moved down to show more of top card */
             left: 5%;
-            /* Slight offset for "stack" feel */
             z-index: 2;
             transform: rotate(-2deg);
-            /* Same orientation */
             animation-delay: 1.2s;
         }
 
         .c4 {
-            top: 35%;
-            /* Moves up to overlap the top row */
-            right: 1%;
-            /* Adjusted to match parallel look */
+            top: 40%;
+            /* Moved down */
+            right: 2%;
             z-index: 2;
             transform: rotate(-2deg);
-            /* Same orientation */
             animation-delay: 1.3s;
+        }
+
+        animation-delay: 1.3s;
         }
 
         /* Hover Effect: Bring to front */
